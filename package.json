@@ -21,6 +21,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@heroicons/react": "^2.0.18"
     },
     "eslintConfig": {
         "extends": "./node_modules/standard/eslintrc.json"
