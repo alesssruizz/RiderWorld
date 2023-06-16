@@ -1,10 +1,9 @@
 
 export default function Landing ({ className = '' }) {
   return (
-    <div className='relative isolate px-6 pt-14 lg:px-8'>
+    <div className='relative isolate px-6 pt-14 lg:px-8 min-h-screen'>
       <div
         className='absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'
-        aria-hidden='true'
       >
         <div
           className='relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]'
@@ -14,40 +13,33 @@ export default function Landing ({ className = '' }) {
           }}
         />
       </div>
-      <div className='mx-auto max-w-2xl py-32 sm:py-48 lg:py-56'>
+      <div className='mx-auto max-w-2xl py-48 sm:py-44 lg:py-36 xl:py-auto'>
         <div className='hidden sm:mb-8 sm:flex sm:justify-center'>
           <div className='relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20'>
-            Announcing our next round of funding.{' '}
+            Entérate de los modelos que se añadiran a la tienda próximamente.{' '}
             <a href='#' className='font-semibold text-indigo-600'>
-              <span className='absolute inset-0' aria-hidden='true' />
-              Read more <span aria-hidden='true'>&rarr;</span>
+              <span className='absolute inset-0' />
+              Leer más <span>&rarr;</span>
             </a>
           </div>
         </div>
         <div className='text-center'>
-          <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
-            Data to enrich your online business
+          <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-9xl'>
+            Rider<span className='text-indigo-600 '>World</span>
           </h1>
-          <p className='mt-6 text-lg leading-8 text-gray-600'>
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-            fugiat veniam occaecat fugiat aliqua.
-          </p>
-          <div className='mt-10 flex items-center justify-center gap-x-6'>
-            <a
-              href='#'
-              className='rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-            >
-              Get started
-            </a>
-            <a href='#' className='text-sm font-semibold leading-6 text-gray-900'>
-              Learn more <span aria-hidden='true'>→</span>
-            </a>
-          </div>
+          <h2 className='mt-6 text-3xl leading-8 text-gray-600'>
+            Adquiere la moto de tus <span className='text-indigo-600'>sueños</span> de una manera <br className='hidden sm:inline' />
+            <span className='text-indigo-600'>fácil</span> y <span className='text-indigo-600'>rápida</span>
+          </h2>
+          <a href='#bikes' className='mt-10 flex items-center justify-center gap-x-6'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-8 h-8 text-indigo-600 drop-shadow-xl animate-bounce stroke-2 hover:cursor-pointer'>
+              <path strokeLinecap='round' strokeLinejoin='round' d='M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z' />
+            </svg>
+          </a>
         </div>
       </div>
       <div
-        className='absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]'
-        aria-hidden='true'
+        className='absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-50rem)]'
       >
         <div
           className='relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]'

@@ -5,12 +5,13 @@ import Dropdown from '@/Components/Dropdown'
 import NavLink from '@/Components/NavLink'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
 import { Link } from '@inertiajs/react'
+import Alert from '@/components/Alert'
 
-export default function Authenticated ({ user, header, children }) {
+export default function Authenticated ({ user, header, children, flashMessage }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false)
 
   return (
-    <div className='min-h-screen bg-gray-100'>
+    <div className='min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-200 to-indigo-50'>
       <nav className='bg-white border-b border-gray-100'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='flex justify-between h-16'>
@@ -23,9 +24,14 @@ export default function Authenticated ({ user, header, children }) {
 
               <div className='hidden space-x-8 sm:-my-px sm:ml-10 sm:flex'>
                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                  Dashboard
+                  Mis motos
                 </NavLink>
-
+                <NavLink href={route('bikes.create')} active={route().current('bikes.create')}>
+                  Vender una moto
+                </NavLink>
+                <NavLink href={route('profile.edit')} active={route().current('profile.edit')}>
+                  Perfil
+                </NavLink>
               </div>
             </div>
 
@@ -57,7 +63,6 @@ export default function Authenticated ({ user, header, children }) {
                   </Dropdown.Trigger>
 
                   <Dropdown.Content>
-                    <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
                     <Dropdown.Link href={route('logout')} method='post' as='button'>
                       Log Out
                     </Dropdown.Link>
@@ -121,6 +126,7 @@ export default function Authenticated ({ user, header, children }) {
         </header>
       )}
 
+      {flashMessage && (<Alert>{flashMessage}</Alert>)}
       <main>{children}</main>
     </div>
   )

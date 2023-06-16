@@ -1,14 +1,17 @@
-import { Head } from '@inertiajs/react'
+import { Head, usePage } from '@inertiajs/react'
 import Header from '../components/Header'
 import Landing from '../components/Landing'
+import Bikes from '../components/Bikes'
 
-export default function Welcome ({ auth, laravelVersion, phpVersion }) {
+export default function Welcome ({ auth, laravelVersion, phpVersion, bikes }) {
+  console.log(usePage().props)
+
   return (
-    <main className='min-h-screen bg-center bg-white'>
+    <main className='bg-center bg-white bg-dots-darker relative'>
       <Head title='Welcome' />
       <Header auth={auth} />
       <Landing />
-
+      <Bikes bikes={bikes} />
       <style>
         {`
           .bg-dots-darker {

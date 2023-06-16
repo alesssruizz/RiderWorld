@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\BikeController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use App\Models\Bike;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,26 +20,58 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+Route::get('/', [BikeController::class, 'index'])->name('welcome');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    
+    Route::get('dashboard', function () {
+        auth()->user()->bikes->load('user');
+        
+        if(session()->get('created') || session()->get('updated') || session()->get('destroyed')){
+
+            $flashMessage = session()->get('created') ?? session()->get('updated') ?? session()->get('destroyed');
+            return Inertia::render('Dashboard', [
+                'flashMessage' => $flashMessage,
+            ]);
+        }
+
+        return Inertia::render('Dashboard');
+            
+    })->name('dashboard');
+    
+    
+    
+    Route::get('/bikes/create', [BikeController::class, 'create'])->name('bikes.create');
+    Route::post('/bikes', [BikeController::class, 'store'])->name('bikes.store');
+    Route::get('/bikes/{bike}/edit', [BikeController::class, 'edit'])->name('bikes.edit');
+    Route::put('/bikes/{bike}', [BikeController::class, 'update'])->name('bikes.update');
+    Route::delete('/bikes/{bike}', [BikeController::class, 'destroy'])->name('bikes.destroy');
+});
+
+Route::get('/bikes/{bike}', [BikeController::class, 'show'])->name('bikes.show');
+
+Route::get('/pruebas', function (Request $request) {
+    $data = null;
+
+    if( $request->has('name') ){
+        switch($request->input('name')){
+            case 'Alessandro':
+
+                $data = DB::table('users')->select('id', 'email as name')->get();
+
+            break;
+            default:
+                // dd('No se encontro el nombre');
+            break;
+        }
+    }
+
+    return Inertia::render('Pruebas', [
+        'parameters' => $request->all(),
+        'modelo' => $data
     ]);
-})->name('welcome');
+})->name('pruebas');
 
-Route::get('/landing', function () {
-    return Inertia::render('Landing');
-})->name('landing');
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/bikes', function () {
-    return Inertia::render('Bikes');
-})->name('bikes');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
