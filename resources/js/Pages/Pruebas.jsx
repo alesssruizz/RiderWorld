@@ -6,13 +6,14 @@ export default function Pruebas ({ parameters, modelo }) {
     name: '',
     modelo: ''
   })
-  console.log({ parameters, modelo })
+
   const handleClick = (e) => {
     e.preventDefault()
     get('/pruebas', {
       preserveState: true
     })
   }
+
   return (
     <main className=''>
       <form action='' method='get'>

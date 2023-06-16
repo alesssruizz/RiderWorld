@@ -4,7 +4,7 @@ import InputLabel from '@/components/InputLabel'
 import InputError from '@/components/InputError'
 import PrimaryButton from '@/components/PrimaryButton'
 import SecondaryButton from '@/components/SecondaryButton'
-import { useForm, router, usePage } from '@inertiajs/react'
+import { useForm, router } from '@inertiajs/react'
 import Modal from '@/components/Modal'
 import { useState } from 'react'
 
@@ -25,11 +25,6 @@ export default function UpdateMoto ({ bike, children, errors }) {
   })
 
   const [confirmingBikeUpdate, setConfirmingBikeUpdate] = useState(false)
-
-  const openModal = (e) => {
-    e.preventDefault()
-    setConfirmingBikeUpdate(true)
-  }
 
   const closeModal = () => {
     setConfirmingBikeUpdate(false)

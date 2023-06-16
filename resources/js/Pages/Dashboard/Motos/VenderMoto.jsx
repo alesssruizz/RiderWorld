@@ -8,7 +8,7 @@ import PrimaryButton from '@/Components/PrimaryButton'
 import TextInput from '@/Components/TextInput'
 
 function CreateBikeForm () {
-  const { data, setData, post, processing, progress, errors, reset } = useForm({
+  const { data, setData, post, processing, errors, reset } = useForm({
     marca: '',
     modelo: '',
     año: '',
@@ -22,7 +22,6 @@ function CreateBikeForm () {
     descripcion: '',
     bike_image: ''
   })
-  console.log(progress)
 
   const submit = (e) => {
     e.preventDefault()
