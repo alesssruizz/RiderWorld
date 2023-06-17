@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('precio', unsigned: true);
             $table->integer('kilometros', unsigned: true);
             $table->longText('descripcion');
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->default(1);
             $table->timestamps();
         });
     }
