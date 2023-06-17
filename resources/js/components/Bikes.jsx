@@ -6,7 +6,6 @@ export default function Bikes ({ bikes }) {
   const isDashboard = route().current('dashboard')
   const user = usePage().props.auth.user
   const hasBikes = bikes.data?.length > 0
-  console.log(bikes.data)
   return (
     <section id='bikes'>
       {hasBikes
@@ -84,7 +83,7 @@ function BikesResults ({ bikes, isDashboard }) {
                   <span
                     className='inline-flex items-center px-2 py-1 shadow rounded-md bg-purple-50 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10 h-fit my-auto'
                   >
-                    {bike.kilometros < 1000 ? 'Nueva' : 'Segunda mano'}
+                    {bike.kilometros < 1000 ? 'Nueva!' : 'Segunda mano'}
                   </span>
                   <span className={`flex absolute h-3 w-3 top-0 right-0 mt-1 -mr-1 ${bike.kilometros > 1000 && 'hidden'}`}>
                     <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75' />
