@@ -13,7 +13,8 @@ export default function Modal ({ children, show = false, maxWidth = '2xl', close
     md: 'sm:max-w-md',
     lg: 'sm:max-w-lg',
     xl: 'sm:max-w-xl',
-    '2xl': 'sm:max-w-2xl'
+    '2xl': 'lg:max-w-2xl',
+    '7xl': 'lg:max-w-7xl'
   }[maxWidth]
 
   return (
@@ -21,7 +22,7 @@ export default function Modal ({ children, show = false, maxWidth = '2xl', close
       <Dialog
         as='div'
         id='modal'
-        className='fixed inset-0 flex overflow-y-auto px-4 py-6 sm:px-0 items-center z-50 transform transition-all'
+        className='fixed inset-0 flex px-4 py-6 sm:px-0 sm:items-center z-50 transform transition-all'
         onClose={close}
       >
         <Transition.Child
@@ -46,7 +47,7 @@ export default function Modal ({ children, show = false, maxWidth = '2xl', close
           leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
         >
           <Dialog.Panel
-            className={`mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto ${maxWidthClass}`}
+            className={`mb-6 bg-white rounded-lg overflow-auto max-w-md shadow-xl transform transition-all w-full mx-auto ${maxWidthClass}`}
           >
             {children}
           </Dialog.Panel>

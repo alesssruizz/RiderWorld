@@ -50,7 +50,7 @@ function BikesResults ({ bikes, isDashboard }) {
       </div>
       <div className='grid grid-cols-1 gap-x-6 gap-y-10 xl:grid-cols-2 xl:gap-x-8'>
         {bikes.map((bike) => (
-          <section key={bike.id} className='relative'>
+          <section key={bike.id} id={bike.id} className='relative'>
             {isDashboard && (
               <div className='absolute top-2 right-2 z-10'>
                 <EditBike bike={bike} />
