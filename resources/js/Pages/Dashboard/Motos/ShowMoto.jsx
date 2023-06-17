@@ -20,7 +20,6 @@ export default function ShowMoto ({ bike, auth }) {
 
   const [showModal, setShowModal] = useState(true)
   const [showBuyButton, setShowBuyButton] = useState(`${bike.precio} €`)
-  console.log(bike)
 
   const closeModal = () => {
     setShowModal(false)
