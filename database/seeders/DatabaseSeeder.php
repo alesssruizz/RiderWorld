@@ -37,7 +37,9 @@ class DatabaseSeeder extends Seeder
         DB::table('bikes')->truncate();
 
         Storage::deleteDirectory('public/bikes');
+        Storage::deleteDirectory('public/avatar');
         Storage::makeDirectory('public/bikes');
+        Storage::makeDirectory('public/avatar');
 
         User::create([
             'name' => 'RiderWorld',
