@@ -6,6 +6,7 @@ use App\Models\Bike;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class BikeController extends Controller
@@ -14,11 +15,13 @@ class BikeController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {            
+        // dd($data);
+        // dd(Bike::paginate(10)->items()[0]->user_id);
         return Inertia::render('Welcome', [
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
-            'bikes' => Bike::all()->load('user')
+            'bikes' => Bike::with('user')->latest()->paginate(10)
         ]);
     }
 

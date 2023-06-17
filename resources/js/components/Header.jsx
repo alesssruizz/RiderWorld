@@ -1,7 +1,7 @@
 /* global route */
 import { Link } from '@inertiajs/react'
 import ApplicationLogo from './ApplicationLogo'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
@@ -16,18 +16,21 @@ export default function Header ({ auth, className = '' }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [headerBgScroll, setHeaderBgScroll] = useState('')
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY < 1000 && headerBgScroll !== '') {
+  const handleScroll = () => {
+    if (window.scrollY < 1300) {
       setHeaderBgScroll('')
-      return
+    } else {
+      setHeaderBgScroll('backdrop-blur-md bg-white bg-opacity-50 shadow-2xl shadow-indigo-200 ring-1 ring-inset ring-purple-700/10')
     }
-    if (window.scrollY >= 1000 && headerBgScroll !== 'bg-white/60') {
-      setHeaderBgScroll('bg-white/60')
-    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   })
 
   return (
-    <header className={'fixed inset-x-0 top-0 z-10 transition-colors duration-1000 ' + headerBgScroll}>
+    <header className={'fixed inset-x-0 top-0 z-10 transition-all ease-in-out delay-500 duration-700  ' + headerBgScroll}>
       <nav
         className='flex items-center justify-between p-6 lg:px-8'
         aria-label='Global'

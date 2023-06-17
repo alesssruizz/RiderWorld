@@ -25,18 +25,19 @@ Route::get('/', [BikeController::class, 'index'])->name('welcome');
 Route::middleware(['auth', 'verified'])->group(function () {
     
     Route::get('dashboard', function () {
-        auth()->user()->bikes->load('user');
-        
+        $bikes = auth()->user()->bikes()->with('user')->latest()->paginate(10);
+        // dd($bikes);
         if(session()->get('created') || session()->get('updated') || session()->get('destroyed')){
 
             $flashMessage = session()->get('created') ?? session()->get('updated') ?? session()->get('destroyed');
             return Inertia::render('Dashboard', [
                 'flashMessage' => $flashMessage,
+                'bikes' => $bikes,
             ]);
         }
 
-        return Inertia::render('Dashboard');
-            
+        return Inertia::render('Dashboard', compact('bikes'));
+        
     })->name('dashboard');
     
     
