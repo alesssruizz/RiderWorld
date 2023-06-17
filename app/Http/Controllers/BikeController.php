@@ -68,7 +68,7 @@ class BikeController extends Controller
     public function show(Bike $bike)
     {
         return Inertia::render('Dashboard/Motos/ShowMoto', [
-            'bike' => $bike
+            'bike' => Bike::where('id', $bike->id)->with('user')->first()
         ]);
     }
 
