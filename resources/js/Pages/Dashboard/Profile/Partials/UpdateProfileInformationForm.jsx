@@ -3,32 +3,53 @@ import InputError from '@/Components/InputError'
 import InputLabel from '@/Components/InputLabel'
 import PrimaryButton from '@/Components/PrimaryButton'
 import TextInput from '@/Components/TextInput'
-import { Link, useForm, usePage } from '@inertiajs/react'
+import { Link, useForm, usePage, router } from '@inertiajs/react'
 import { Transition } from '@headlessui/react'
+import { useState } from 'react'
+import Avatar from '@/components/Avatar'
 
-export default function UpdateProfileInformation ({ mustVerifyEmail, status, className = '' }) {
+export default function UpdateProfileInformation ({ mustVerifyEmail, status, errors, className = '' }) {
   const user = usePage().props.auth.user
+  const [recentlySuccessful, setRecentlySuccessful] = useState(false)
 
-  const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
+  const { data, setData, processing } = useForm({
     name: user.name,
-    email: user.email
+    email: user.email,
+    profile_image: null
   })
 
   const submit = (e) => {
     e.preventDefault()
 
-    patch(route('profile.update'))
+    // patch(route('profile.update'))
+    router.post(route('profile.update'), {
+      _method: 'patch',
+      ...data,
+      preserveScroll: true
+    })
+  }
+
+  const handleClick = () => {
+    setRecentlySuccessful(true)
+
+    setTimeout(() => {
+      setRecentlySuccessful(false)
+    }, 2000)
   }
 
   return (
     <section className={className}>
       <header>
-        <h2 className='text-lg font-medium text-gray-900'>Profile Information</h2>
+        <h2 className='text-lg font-medium text-gray-900'>Informacion del perfil</h2>
 
         <p className='mt-1 text-sm text-gray-600'>
-          Update your account's profile information and email address.
+          Actualiza la informacion de tu perfil.
         </p>
       </header>
+
+      <div className='mt-6'>
+        <Avatar src={user.profile_image} className='w-60 ' />
+      </div>
 
       <form onSubmit={submit} className='mt-6 space-y-6'>
         <div>
@@ -63,6 +84,20 @@ export default function UpdateProfileInformation ({ mustVerifyEmail, status, cla
           <InputError className='mt-2' message={errors.email} />
         </div>
 
+        <div>
+          <InputLabel htmlFor='image' value='Nueva foto de perfil' />
+
+          <TextInput
+            id='image'
+            name='image'
+            type='file'
+            className='mt-1 block w-full'
+            onChange={(e) => setData('profile_image', e.target.files[0])}
+          />
+
+          <InputError message={errors.profile_image} className='mt-2' />
+        </div>
+
         {mustVerifyEmail && user.email_verified_at === null && (
           <div>
             <p className='text-sm mt-2 text-gray-800'>
@@ -86,7 +121,7 @@ export default function UpdateProfileInformation ({ mustVerifyEmail, status, cla
         )}
 
         <div className='flex items-center gap-4'>
-          <PrimaryButton disabled={processing}>Save</PrimaryButton>
+          <PrimaryButton disabled={processing} onClick={handleClick}>Save</PrimaryButton>
 
           <Transition
             show={recentlySuccessful}

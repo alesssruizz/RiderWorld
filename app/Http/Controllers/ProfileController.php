@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -35,6 +36,11 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
+        if($request->hasFile('profile_image')){
+            $path = $request->file('profile_image')->store('avatar', 'public');
+            request()->user()->profile_image = Storage::url($path);
+        }
+        
         $request->user()->save();
 
         return Redirect::route('profile.edit');
