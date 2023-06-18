@@ -80,6 +80,8 @@ class BikeController extends Controller
      */
     public function edit(Bike $bike)
     {
+         $this->authorize('update', $bike);
+
         return Inertia::render('Dashboard/Motos/EditarMoto', [
             'bike' => $bike
         ]);
@@ -90,6 +92,8 @@ class BikeController extends Controller
      */
     public function update(Request $request, Bike $bike)
     {
+        $this->authorize('update', $bike);
+
         $data = $request->validate([
             'marca' => 'required|string',
             'modelo' => 'required|string',
@@ -105,7 +109,6 @@ class BikeController extends Controller
             'bike_image' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         
-
         if($request->hasFile('bike_image')){
             $path = $request->file('bike_image')->store('bikes', 'public');
             $data['bike_image'] = Storage::url($path);
@@ -123,8 +126,10 @@ class BikeController extends Controller
      */
     public function destroy(Bike $bike)
     {
-        $bike->delete();
+        $this->authorize('delete', $bike);
 
+        $bike->delete();
+        
         return redirect()->route('dashboard')->with('destroyed', "Tú $bike->marca $bike->modelo se ha sido eliminado con éxito.");
     }
 }
