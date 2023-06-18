@@ -1,8 +1,7 @@
-/* global route */
 import Modal from '@/components/Modal'
 import Header from '@/components/Header'
 import Landing from '@/components/Landing'
-import { Head, router } from '@inertiajs/react'
+import { Head } from '@inertiajs/react'
 import { useState } from 'react'
 import Avatar from '@/components/Avatar'
 import PrimaryButton from '@/components/PrimaryButton'
@@ -23,8 +22,9 @@ export default function ShowMoto ({ bike, auth }) {
   const [showBuyButton, setShowBuyButton] = useState(`${bike.precio} €`)
 
   const closeModal = () => {
+    // router.visit(route('welcome') + `#${bike.id}`)
+    window.history.go(-1)
     setShowModal(false)
-    router.visit(route('welcome') + `#${bike.id}`)
   }
 
   const handleMouseEnter = (e) => {
