@@ -17,20 +17,6 @@ export default function Filter ({ filters: { marca, modelo, año } }) {
     })
   }
 
-  const handleChange = (e) => {
-    if (e.target.name === 'marca') {
-      setData('modelo', '')
-      setData('año', '')
-      console.log('marca')
-    }
-    if (e.target.name === 'modelo') {
-      setData('año', '')
-    }
-    setData(e.target.name, e.target.value)
-
-    // submit(e)
-  }
-
   return (
     <div className='bg-white' id='filtro'>
       <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
@@ -43,7 +29,7 @@ export default function Filter ({ filters: { marca, modelo, año } }) {
                 name='marca'
                 className='block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                 value={data.marca}
-                onChange={handleChange}
+                onChange={(e) => { setData('marca', e.target.value) }}
               >
                 <option value='' disabled>Marca</option>
                 {marca?.map((listElement) => (
@@ -64,7 +50,7 @@ export default function Filter ({ filters: { marca, modelo, año } }) {
                 name='modelo'
                 className='block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                 value={data.modelo}
-                onChange={handleChange}
+                onChange={(e) => { setData('modelo', e.target.value) }}
               >
                 <option value='' disabled>Modelo</option>
                 {modelo?.map((listElement) => (
@@ -85,7 +71,7 @@ export default function Filter ({ filters: { marca, modelo, año } }) {
                 name='año'
                 className='block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                 value={data.año}
-                onChange={handleChange}
+                onChange={(e) => { setData('año', e.target.value) }}
               >
                 <option value='' disabled>Año</option>
                 {año?.map((listElement) => (
@@ -109,13 +95,15 @@ export default function Filter ({ filters: { marca, modelo, año } }) {
             </PrimaryButton>
           </form>
           <div className='text-center mt-5 flex flex-cols gap-x-3 justify-center'>
-            <span className='inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20'>
-              Quitar filtros
-              <button onClick={() => router.visit(route('welcome') + '#filtro')} type='button' className='flex-shrink-0 ml-1 h-4 w-4 inline-flex items-center justify-center text-green-700'>
-                <span className='sr-only'>Close menu</span>
-                <XMarkIcon className='h-6 w-6' aria-hidden='true' />
-              </button>
-            </span>
+            {data.marca !== '' && (
+              <span className='inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20'>
+                Quitar filtros
+                <button onClick={() => router.visit(route('welcome') + '#filtro')} type='button' className='flex-shrink-0 ml-1 h-4 w-4 inline-flex items-center justify-center text-green-700'>
+                  <span className='sr-only'>Close menu</span>
+                  <XMarkIcon className='h-6 w-6' aria-hidden='true' />
+                </button>
+              </span>
+            )}
 
           </div>
         </div>
