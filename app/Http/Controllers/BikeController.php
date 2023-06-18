@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BikeRequest;
 use App\Models\Bike;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -37,22 +38,9 @@ class BikeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BikeRequest $request)
     {
-        $data = $request->validate([
-            'marca' => 'required|string',
-            'modelo' => 'required|string',
-            'año' => 'required|digits:4|integer|min:1950',
-            'tipo' => 'nullable|string',
-            'cilindrada' => 'nullable|numeric',
-            'potencia' => 'nullable|decimal:0,2',
-            'numMarchas' => 'nullable|numeric|max:9',
-            'peso' => 'nullable|numeric',
-            'precio' => 'required|decimal:0,2|digits_between:1,6',
-            'kilometros' => 'required|numeric|digits_between:1,7',
-            'descripcion' => 'required|string',
-            'bike_image' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
+        $data = $request->validated();
 
         if($request->hasFile('bike_image')){
             $path = $request->file('bike_image')->store('bikes', 'public');
@@ -90,24 +78,11 @@ class BikeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Bike $bike)
+    public function update(BikeRequest $request, Bike $bike)
     {
         $this->authorize('update', $bike);
 
-        $data = $request->validate([
-            'marca' => 'required|string',
-            'modelo' => 'required|string',
-            'año' => 'required|digits:4|integer|min:1950',
-            'tipo' => 'nullable|string',
-            'cilindrada' => 'nullable|numeric',
-            'potencia' => 'nullable|decimal:0,2',
-            'numMarchas' => 'nullable|numeric|max:9',
-            'peso' => 'nullable|numeric',
-            'precio' => 'required|decimal:0,2|digits_between:1,6',
-            'kilometros' => 'required|numeric|digits_between:1,7',
-            'descripcion' => 'required|string',
-            'bike_image' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
+        $data = $request->validated();
         
         if($request->hasFile('bike_image')){
             $path = $request->file('bike_image')->store('bikes', 'public');
@@ -129,7 +104,7 @@ class BikeController extends Controller
         $this->authorize('delete', $bike);
 
         $bike->delete();
-        
+
         return redirect()->route('dashboard')->with('destroyed', "Tú $bike->marca $bike->modelo se ha sido eliminado con éxito.");
     }
 }
