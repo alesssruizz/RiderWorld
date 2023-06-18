@@ -71,7 +71,8 @@ class DatabaseSeeder extends Seeder
                 'precio' => 21900,
                 'kilometros' => 0,
                 'descripcion' => "La Ducati Unica es una moto que combina el estilo de una cruiser con el rendimiento de una naked. Tiene un motor tetracilindrico Testastretta DVT de 1262 cc que ofrece una potencia de 162 CV y un par de 129 Nm. Cuenta con un chasis de aluminio, una suspensión Öhlins, un sistema de frenos Brembo, un control de tracción, un ABS, un control de crucero, un cambio rápido y tres modos de conducción.",
-                'bike_image' => "/storage/default/1.webp"
+                'bike_image' => "/storage/default/1.webp",
+                "user_id" => 2
             ],
             [
                 'marca' => "Ducati",
@@ -113,7 +114,8 @@ class DatabaseSeeder extends Seeder
                 'precio' => 50000,
                 'kilometros' => rand(0, 100000),
                 'descripcion' => 'La KTM RC16 MotoGP es una moto de competición de alto rendimiento utilizada en el campeonato de MotoGP.',
-                'bike_image' => '/storage/default/4.webp'
+                'bike_image' => '/storage/default/4.webp',
+                "user_id" => 2
             ],
             [
                 'marca' => 'Kawasaki',
