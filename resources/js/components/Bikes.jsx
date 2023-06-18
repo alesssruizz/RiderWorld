@@ -21,8 +21,8 @@ export default function Bikes ({ bikes }) {
 
 function BikesResults ({ bikes, isDashboard }) {
   return (
-    <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8'>
-      <div className='text-center mb-10'>
+    <div className='mx-auto max-w-2xl px-4 py-1 sm:px-6 lg:max-w-7xl lg:px-8'>
+      <div className='text-center mb-8'>
         {isDashboard
           ? (
             <>

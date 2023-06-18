@@ -17,12 +17,47 @@ class BikeController extends Controller
      */
     public function index()
     {            
-        // dd($data);
-        // dd(Bike::paginate(10)->items()[0]->user_id);
+        
+        
+        if(request('marca') && request('modelo') && request('año')){
+            $bikes = Bike::where('marca', request('marca'))
+            ->where('modelo', request('modelo'))
+            ->where('año', request('año'))
+            ->with('user')
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+        }elseif(request('marca') && request('modelo')){
+            $bikes = Bike::where('marca', request('marca'))
+            ->where('modelo', request('modelo'))
+            ->with('user')
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+        }elseif (request('marca')){
+            $bikes = Bike::where('marca', request('marca'))
+            ->with('user')
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+        }else{
+            $bikes = Bike::with('user')->latest()->paginate(10);
+        }
+        // dd($bikes);
+        
+        
+        $año = Bike::select('año')->where('marca', request('marca'))->where('modelo', request('modelo'))->distinct()->get()->pluck('año');
+        // dd(request('marca'));
+        $modelo = Bike::select('modelo')->where('marca', request('marca'))->distinct()->get()->pluck('modelo');
         return Inertia::render('Welcome', [
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
-            'bikes' => Bike::with('user')->latest()->paginate(10)
+            'bikes' => $bikes,
+            'filters' => [
+                'marca' => Bike::select('marca')->distinct()->get()->pluck('marca'),
+                'modelo' => $modelo ?? [''],
+                'año' => $año ?? ['']
+            ]
         ]);
     }
 

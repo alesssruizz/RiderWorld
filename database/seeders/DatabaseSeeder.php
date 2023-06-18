@@ -46,14 +46,16 @@ class DatabaseSeeder extends Seeder
             'name' => 'RiderWorld',
             'email' => 'riderworld@riderworld.es',
             'password' => Hash::make('riderworld'),
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
+            'profile_image' => '/storage/default/default.webp'
         ]);
 
         User::create([
             'name' => 'Alessandro',
             'email' => 'alessandro@riderworld.es',
             'password' => Hash::make('123456'),
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
+            'profile_image' => '/storage/default/alessImage.jpg'
         ]);
 
         $motos = [
@@ -182,7 +184,121 @@ class DatabaseSeeder extends Seeder
                 'kilometros' => 10000,
                 'descripcion' => 'La Yamaha R6 es una motocicleta deportiva.',
                 'bike_image' => '/storage/default/9.webp'
-            ]
+            ],
+            [
+                'marca' => 'Honda',
+                'modelo' => 'CBR 1000 RR',
+                'año' => 2020,
+                'tipo' => 'Deportiva',
+                'cilindrada' => 1000,
+                'potencia' => 217,
+                'numMarchas' => 6,
+                'peso' => 201,
+                'precio' => 19999,
+                'kilometros' => 0,
+                'descripcion' => 'La moto más rápida y potente de Honda',
+                // 'bike_image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Honda_CBR1000RR_2020.jpg/1200px-Honda_CBR1000RR_2020.jpg'
+            ],
+            [
+                'marca' => 'Yamaha',
+                'modelo' => 'MT-07',
+                'año' => 2019,
+                'tipo' => 'Naked',
+                'cilindrada' => 689,
+                'potencia' => 74,
+                'numMarchas' => 6,
+                'peso' => 182,
+                'precio' => 6999,
+                'kilometros' => 0,
+                'descripcion' => 'Una moto versátil y divertida para el día a día',
+                // 'bike_image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Yamaha_MT-07_2019.jpg/1200px-Yamaha_MT-07_2019.jpg'
+            ],
+            [
+                'marca' => 'Suzuki',
+                'modelo' => 'GSX-R 750',
+                'año' => 2018,
+                'tipo' => 'Deportiva',
+                'cilindrada' => 750,
+                'potencia' => 150,
+                'numMarchas' => 6,
+                'peso' => 190,
+                'precio' => 13999,
+                'kilometros' => 0,
+                'descripcion' => 'Una moto deportiva con un equilibrio perfecto entre potencia y manejabilidad',
+                // 'bike_image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Suzuki_GSX-R_750_2018.jpg/1200px-Suzuki_GSX-R_750_2018.jpg'
+            ],
+            [
+                'marca' => 'Kawasaki',
+                'modelo' => 'Z900',
+                'año' => 2021,
+                'tipo' => 'Naked',
+                'cilindrada' => 948,
+                'potencia' => 125,
+                'numMarchas' => 6,
+                'peso' => 212,
+                'precio' => 9999,
+                'kilometros' => 0,
+                'descripcion' => 'Una moto naked con un diseño agresivo y un motor potente',
+                // 'bike_image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Kawasaki_Z900_2021.jpg/1200px-Kawasaki_Z900_2021.jpg'
+            ],
+            [
+                'marca' => 'BMW',
+                'modelo' => 'R 1250 GS',
+                'año' => 2020,
+                'tipo' => 'Trail',
+                'cilindrada' => 1254,
+                'potencia' => 136,
+                'numMarchas' => 6,
+                'peso' => 249,
+                'precio' => 18900,
+                'kilometros' => rand(0, 50000),
+                'descripcion' => 'Una moto trail con un alto rendimiento y una gran versatilidad',
+                // 'bike_image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/BMW_R_1250_GS_2020.jpg/1200px-BMW_R_1250_GS_2020.jpg'
+            ],
+            [
+                'marca' => 'Ducati',
+                'modelo' => 'Monster 821',
+                'año' => 2019,
+                'tipo' => 'Naked',
+                'cilindrada' => 821,
+                'potencia' => 109,
+                'numMarchas' => 6,
+                'peso' => 206,
+                'precio' => 11990,
+                'kilometros' => rand(0, 50000),
+                'descripcion' => 'Una moto naked con un diseño icónico y un carácter deportivo',
+                // 'bike_image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Ducati_Monster_821_2019.jpg/1200px-Ducati_Monster_821_2019.jpg'
+            ],
+            [
+                'marca' =>    'Honda',
+                'modelo' =>    'Africa Twin',
+                'año' =>    2021,
+                'tipo' =>    'Trail',
+                'cilindrada' =>    1084,
+                'potencia' =>    102,
+                'numMarchas' =>    6,
+                'peso' =>    226,
+                'precio' =>    14999,
+                'kilometros' =>    rand(0, 50000),
+                'descripcion' =>    "Una moto trail con una gran capacidad de aventura y una tecnología avanzada",
+                //"bike_image"=> "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Honda_Africa_Twin_2021.jpg/1200px-Honda_Africa_Twin_2021.jpg"
+            ],
+            [
+                'marca' =>    "Yamaha",
+                'modelo' =>    "R1",
+                'año' =>    2020,
+                'tipo' =>    "Deportiva",
+                "cilindrada" => 998,
+                "potencia" => 200,
+                "numMarchas" => 6,
+                "peso" => 201,
+                "precio" => 21999,
+                "kilometros" => rand(0, 50000),
+                "descripcion" => "Una moto deportiva con un alto nivel de prestaciones y una electrónica de vanguardia",
+                //"bike_image"=>"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Yamaha_R1_2020.jpg/1200px-Yamaha_R1_2020.jpg"
+            ],
+
+
         ];
 
         foreach ($motos as $moto) {

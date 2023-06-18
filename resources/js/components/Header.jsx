@@ -7,9 +7,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
   { name: 'Bikes', href: '#bikes' },
-  { name: 'Pruebas', href: route('pruebas') },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' }
+  { name: 'Vende tu moto', href: route('bikes.create') },
+  { name: 'Perfil', href: route('profile.edit') }
 ]
 
 export default function Header ({ auth, className = '' }) {
