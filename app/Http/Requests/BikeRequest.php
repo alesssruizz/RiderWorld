@@ -33,7 +33,7 @@ class BikeRequest extends FormRequest
             'precio' => 'required|decimal:0,2|digits_between:1,6',
             'kilometros' => 'required|numeric|digits_between:1,7',
             'descripcion' => 'required|string',
-            'bike_image' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'bike_image' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg,webp|max:2048'
         ];
     }
 }
