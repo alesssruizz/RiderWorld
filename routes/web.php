@@ -28,7 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         $bikes = auth()->user()->bikes()->with('user')->latest()->paginate(10);
         // dd($bikes);
         if(session()->get('created') || session()->get('updated') || session()->get('destroyed')){
-
+            
             $flashMessage = session()->get('created') ?? session()->get('updated') ?? session()->get('destroyed');
             return Inertia::render('Dashboard', [
                 'flashMessage' => $flashMessage,
@@ -46,6 +46,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/bikes', [BikeController::class, 'store'])->name('bikes.store');
     Route::get('/bikes/{bike}/edit', [BikeController::class, 'edit'])->name('bikes.edit');
     Route::put('/bikes/{bike}', [BikeController::class, 'update'])->name('bikes.update');
+    Route::patch('/bikes/{bike}', [BikeController::class, 'buy'])->name('buy.bike');
     Route::delete('/bikes/{bike}', [BikeController::class, 'destroy'])->name('bikes.destroy');
 });
 

@@ -58,6 +58,13 @@ class DatabaseSeeder extends Seeder
             'profile_image' => '/storage/default/alessImage.jpg'
         ]);
 
+        User::create([
+            'name' => 'Alberto',
+            'email' => 'alberto@riderworld.es',
+            'password' => Hash::make('123456'),
+            'email_verified_at' => now()
+        ]);
+
         $motos = [
             [
                 'marca' => "Ducati",

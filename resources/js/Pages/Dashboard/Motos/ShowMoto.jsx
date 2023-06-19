@@ -1,7 +1,8 @@
+/* global route */
 import Modal from '@/components/Modal'
 import Header from '@/components/Header'
 import Landing from '@/components/Landing'
-import { Head } from '@inertiajs/react'
+import { Head, router } from '@inertiajs/react'
 import { useState } from 'react'
 import Avatar from '@/components/Avatar'
 import PrimaryButton from '@/components/PrimaryButton'
@@ -17,10 +18,10 @@ export default function ShowMoto ({ bike, auth }) {
     { name: 'Peso (kg)', description: bike.peso ?? 'No especificado' },
     { name: 'Kilometros', description: bike.kilometros === 0 ? 'Nueva' : bike.kilometros }
   ]
-
+  const sameUser = bike.user.id === auth?.user?.id
   const [showModal, setShowModal] = useState(true)
   const [showBuyButton, setShowBuyButton] = useState(`${bike.precio} €`)
-
+  console.log(auth)
   const closeModal = () => {
     // router.visit(route('welcome') + `#${bike.id}`)
     window.history.go(-1)
@@ -28,28 +29,47 @@ export default function ShowMoto ({ bike, auth }) {
   }
 
   const handleMouseEnter = (e) => {
-    if (showBuyButton === 'Comprado!') return
+    if (showBuyButton === 'Comprado!' || showBuyButton === '' || showBuyButton === 'Tienes que estar logueado para comprar') return
     setShowBuyButton('Comprar')
   }
 
   const handleMouseLeave = (e) => {
-    if (showBuyButton === 'Comprado!') return
+    if (showBuyButton === 'Comprado!' || showBuyButton === '' || showBuyButton === 'Tienes que estar logueado para comprar') return
     setShowBuyButton(`${bike.precio} €`)
   }
 
   const handleClick = (e) => {
-    setShowBuyButton('Comprado!')
-    confetti(
-      {
-        particleCount: 100,
-        spread: 90,
-        origin: { y: 0.6 }
-      }
-    )
-    setTimeout(() => {
-      closeModal()
+    if (showBuyButton === 'Comprado!' || showBuyButton === '' || showBuyButton === 'Tienes que estar logueado para comprar') return
+    setShowBuyButton('')
+    if (auth.user === null) {
+      setShowBuyButton('Tienes que estar logueado para comprar')
+      setTimeout(() => {
+        router.visit(route('login'))
+      }, 2000)
+      return
     }
-    , 3000)
+    setTimeout(() => {
+      setShowBuyButton('Comprado!')
+      confetti(
+        {
+          particleCount: 100,
+          spread: 90,
+          origin: { y: 0.6 }
+        }
+      )
+    }, 2000)
+    setTimeout(() => {
+      submit(e)
+    }, 5000)
+  }
+
+  const submit = (e) => {
+    // e.preventDefault()
+    router.visit(route('buy.bike', bike.id), {
+      method: 'patch',
+      data: auth.user.id
+      // onFinish: () => router.visit(route('welcome'))
+    })
   }
 
   return (
@@ -93,10 +113,14 @@ export default function ShowMoto ({ bike, auth }) {
             </div>
           </div>
           <div className='max-w-xs mx-auto mt-5 transition ease-in-out duration-1000'>
-            <PrimaryButton onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleClick} className='min-w-full justify-center'>
-              <ShoppingBagIcon className='h-5 w-5 mr-2' />
-              {showBuyButton}
-            </PrimaryButton>
+            {!sameUser && (
+              <form onSubmit={submit}>
+                <PrimaryButton type='submit' disabled={showBuyButton === ''} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleClick} className='min-w-full justify-center'>
+                  <ShoppingBagIcon className='h-5 w-5 mr-2' />
+                  {showBuyButton}
+                </PrimaryButton>
+              </form>
+            )}
           </div>
         </div>
       </Modal>

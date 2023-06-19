@@ -85,7 +85,7 @@ class BikeController extends Controller
         }
         $bike = auth()->user()->bikes()->create($data);
 
-        return redirect()->route('dashboard')->with('created', "Tú $bike->marca $bike->modelo se ha sido publicado con éxito.");
+        return redirect()->route('dashboard')->with('created', "Tú $bike->marca $bike->modelo se ha publicado con éxito.");
     }
 
     /**
@@ -115,6 +115,7 @@ class BikeController extends Controller
      */
     public function update(BikeRequest $request, Bike $bike)
     {
+        // dd(request());
         $this->authorize('update', $bike);
 
         $data = $request->validated();
@@ -141,5 +142,15 @@ class BikeController extends Controller
         $bike->delete();
 
         return redirect()->route('dashboard')->with('destroyed', "Tú $bike->marca $bike->modelo se ha sido eliminado con éxito.");
+    }
+
+    public function buy(Bike $bike)
+    {
+        // dd(request());
+        $bike->update([
+            'user_id' => auth()->id()
+        ]);
+
+        return redirect()->route('dashboard')->with('updated', "Has comprado una $bike->marca $bike->modelo. Enhorabuena!");
     }
 }
