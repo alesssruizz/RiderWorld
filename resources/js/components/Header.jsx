@@ -86,11 +86,7 @@ export default function Header ({ auth, className = '' }) {
           <div className='flex items-center justify-between'>
             <a href='#' className='-m-1.5 p-1.5'>
               <span className='sr-only'>RiderWorld</span>
-              <img
-                className='h-8 w-auto'
-                src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-                alt=''
-              />
+              <ApplicationLogo className='h-10 w-auto' />
             </a>
             <button
               type='button'

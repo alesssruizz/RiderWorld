@@ -113,7 +113,9 @@ export default function Authenticated ({ user, header, children, flashMessage })
             </div>
 
             <div className='mt-3 space-y-1'>
-              <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+              <ResponsiveNavLink href={route('dashboard')}>Mis motos</ResponsiveNavLink>
+              <ResponsiveNavLink href={route('bikes.create')}>Vender una moto</ResponsiveNavLink>
+              <ResponsiveNavLink href={route('profile.edit')}>Perfil</ResponsiveNavLink>
               <ResponsiveNavLink method='post' href={route('logout')} as='button'>
                 Log Out
               </ResponsiveNavLink>
